@@ -8,41 +8,47 @@
 </head>
 <body>
     <header>
-        <nav>
+        <nav class="navbar">
             <div class="logo">Shahin Alom</div>
-            <ul>
+            <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="about.html" class="active">About</a></li>
                 <li><a href="skills.html">Skills</a></li>
-                <li><a href="certifications.html">Certifications</a></li>
+                <li><a href="certifications.html">Certs</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
         </nav>
     </header>
 
-    <section class="container about-wrapper">
-        <!-- ছবির অংশ (বাম পাশে) -->
-        <div class="about-image">
-            <!-- images ফোল্ডারের ভেতর profile.jpg ঠিক থাকলে কাজ করবে -->
-            <img src="images/new-profile.jpg" alt="Shahin Alom">
-        </div>
+    <main class="container">
+        <div class="about-grid">
+            <div class="about-text">
+                <p class="subtitle">Hello I'm</p>
+                <h1 class="name">Shahin Alom</h1>
+                <p class="role-title">Ethical Hacker | Cyber Security Specialist</p>
+                
+                <p class="bio-desc">I am Shahin Alom, a cybersecurity enthusiast focused on penetration testing, vulnerability assessment, and security hardening. I work on real-world web and network security problems, helping reduce risks and build secure systems with confidence.</p>
+                
+                <h3>Background & Mathematical Logic</h3>
+                <p class="bio-desc">Currently pursuing my 1st-year Honors degree in Mathematics. My math background sharpens my pattern recognition, critical reasoning, and analytical capabilities, providing a strong advantage in cryptography and security architecture analysis.</p>
 
-        <!-- লেখার অংশ (ডান পাশে) -->
-        <div class="about-content">
-            <h1>About Me</h1>
-            <p class="greeting"><strong>Hello! I'm Shahin Alom</strong></p>
-            <p>I am a passionate Cyber Security learner, Threat Analysis enthusiast, and Ethical Hacking practitioner.</p>
-            
-            <h3>Background & Logical Mindset</h3>
-            <p>I am currently a 1st-year undergraduate student pursuing an Honors degree in Mathematics. My background in mathematics equips me with strong analytical thinking, pattern recognition, and problem-solving skills — qualities that directly aid in analyzing complex security architectures, understanding cryptography, and identifying system vulnerabilities.</p>
+                <h3>Core Specializations</h3>
+                <ul class="skills-list">
+                    <li>Network Security & Architecture</li>
+                    <li>Ethical Hacking & Penetration Testing</li>
+                    <li>Vulnerability Assessment & Hardening</li>
+                    <li>Log Analysis & Fundamentals of SOC</li>
+                </ul>
+            </div>
 
-            <h3>Cyber Security Journey</h3>
-            <p>My journey into InfoSec started with building a strong foundation in networking concepts, Linux system administration, and core security fundamentals. Currently, I regularly solve practical hands-on labs on platforms like TryHackMe and Hack The Box to sharpen my offensive and defensive skills.</p>
+            <div class="about-image-card">
+                <img src="images/profile.jpg" alt="Shahin Alom">
+            </div>
         </div>
-    </section>
+    </main>
 
     <footer>
-        <p>&copy; 2026 Shahin Alom. All Rights Reserved.</p>
+        <p>&copy; 2026 Shahin Alom. All rights reserved.</p>
     </footer>
 </body>
 </html>
