@@ -15,9 +15,26 @@ body {
     flex-direction: column;
 }
 
-/* Navigation */
+/* Red Highlight Text */
+.highlight-red {
+    color: #e11d48;
+}
+
+/* Matrix Canvas */
+#matrix-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0.3;
+}
+
+/* Header & Navbar */
 header {
-    background: rgba(11, 15, 23, 0.8);
+    background: rgba(11, 15, 23, 0.85);
     backdrop-filter: blur(10px);
     border-bottom: 1px solid #1e293b;
     position: sticky;
@@ -38,7 +55,6 @@ header {
     font-size: 1.25rem;
     font-weight: 700;
     color: #ffffff;
-    letter-spacing: -0.5px;
 }
 
 .nav-links {
@@ -57,33 +73,33 @@ header {
 
 .nav-links a:hover,
 .nav-links a.active {
-    color: #38bdf8;
-}
-
-/* Layout Container */
-.container {
-    max-width: 1100px;
-    margin: 60px auto;
-    padding: 0 20px;
-    flex: 1;
+    color: #e11d48;
 }
 
 /* Hero Section */
 .hero-container {
     max-width: 1100px;
     margin: auto;
-    padding: 80px 20px;
+    padding: 60px 20px;
     flex: 1;
     display: flex;
     align-items: center;
 }
 
 .hero-content {
-    max-width: 700px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 50px;
+    width: 100%;
+}
+
+.hero-text {
+    flex: 1;
 }
 
 .subtitle {
-    color: #881337;
+    color: #e11d48;
     font-weight: 600;
     font-size: 1.1rem;
     margin-bottom: 10px;
@@ -97,21 +113,42 @@ header {
     margin-bottom: 15px;
 }
 
+/* Typing Effect CSS */
+.typing-container {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #cbd5e1;
+    margin-bottom: 15px;
+}
+
+#typing-text {
+    color: #e11d48;
+}
+
+.cursor {
+    display: inline-block;
+    background-color: #e11d48;
+    width: 2px;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
 .tagline {
-    font-size: 1.15rem;
+    font-size: 1.05rem;
     color: #94a3b8;
     line-height: 1.6;
-    margin-bottom: 30px;
+    margin-bottom: 25px;
 }
 
-.tagline strong {
-    color: #cbd5e1;
-}
-
-/* Buttons */
+/* CTA Buttons */
 .cta-buttons {
     display: flex;
     gap: 15px;
+    margin-bottom: 30px;
 }
 
 .btn {
@@ -143,83 +180,75 @@ header {
     color: #ffffff;
 }
 
-/* About Section */
-.about-grid {
-    display: grid;
-    grid-template-columns: 1fr 380px;
-    gap: 50px;
-    align-items: flex-start;
+/* Social Media Icons */
+.social-links {
+    display: flex;
+    gap: 20px;
 }
 
-.role-title {
-    font-size: 1.1rem;
-    font-weight: 600;
+.social-links a {
+    color: #94a3b8;
+    font-size: 1.3rem;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.social-links a:hover {
     color: #e11d48;
-    margin-bottom: 20px;
+    transform: translateY(-3px);
 }
 
-.bio-desc {
-    color: #94a3b8;
-    line-height: 1.7;
-    margin-bottom: 20px;
-    font-size: 1rem;
-}
-
-.about-text h3 {
-    color: #f1f5f9;
-    font-size: 1.2rem;
-    margin: 25px 0 10px 0;
-}
-
-.skills-list {
-    list-style: square;
-    padding-left: 20px;
-    color: #94a3b8;
-    line-height: 1.8;
-}
-
-.about-image-card {
+/* Profile Image Card */
+.hero-image-card {
+    flex: 0 0 300px;
     border-radius: 12px;
     overflow: hidden;
     border: 1px solid #1e293b;
     background: #0f172a;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    text-align: center;
 }
 
-.about-image-card img {
+.hero-image-card img {
     width: 100%;
     height: auto;
     display: block;
     object-fit: cover;
 }
 
+.image-caption {
+    padding: 10px 0;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #94a3b8;
+    letter-spacing: 0.5px;
+    border-top: 1px solid #1e293b;
+}
+
 /* Footer */
 footer {
     border-top: 1px solid #1e293b;
-    padding: 30px 20px;
+    padding: 25px 20px;
     text-align: center;
     color: #64748b;
     font-size: 0.9rem;
     margin-top: auto;
 }
 
-/* Responsive */
+/* Mobile Responsive */
 @media (max-width: 768px) {
-    .about-grid {
-        grid-template-columns: 1fr;
+    .hero-content {
+        flex-direction: column-reverse;
+        text-align: center;
+        gap: 30px;
+    }
+    .hero-image-card {
+        flex: 0 0 auto;
+        max-width: 220px;
+    }
+    .cta-buttons, .social-links {
+        justify-content: center;
     }
     .name {
-        font-size: 2.3rem;
+        font-size: 2.4rem;
     }
-}
-/* Matrix Rain Canvas Background */
-#matrix-canvas {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: -1;
-    pointer-events: none;
-    opacity: 0.6; /* স্পষ্ট দেখার জন্য অপাসিটি বাড়ানো হলো */
 }
