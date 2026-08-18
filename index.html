@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shahin Alom - Cybersecurity Enthusiast | Ethical Hacker</title>
     <link rel="stylesheet" href="style.css">
+    <!-- FontAwesome Icons for Social Media -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
     <!-- Matrix Rain Canvas Background -->
@@ -12,7 +14,7 @@
 
     <header>
         <nav class="navbar">
-            <div class="logo">Shahin Alom</div>
+            <div class="logo">Shahin <span class="highlight-red">Alom</span></div>
             <ul class="nav-links">
                 <li><a href="index.html" class="active">Home</a></li>
                 <li><a href="about.html">About</a></li>
@@ -25,13 +27,35 @@
 
     <main class="hero-container">
         <div class="hero-content">
-            <p class="subtitle">Hello World — I'm</p>
-            <h1 class="name">Shahin Alom</h1>
-            <p class="tagline"><strong>Ethical Hacker & InfoSec Researcher</strong> specializing in Network Security, Penetration Testing, and Vulnerability Assessment.</p>
-            
-            <div class="cta-buttons">
-                <a href="about.html" class="btn btn-primary">About Me</a>
-                <a href="contact.html" class="btn btn-secondary">Contact</a>
+            <div class="hero-text">
+                <p class="subtitle">Hello World — I'm</p>
+                <h1 class="name">Shahin <span class="highlight-red">Alom</span></h1>
+                
+                <!-- Typing Animation Section -->
+                <p class="typing-container">
+                    Specializing in <span id="typing-text"></span><span class="cursor">&nbsp;</span>
+                </p>
+
+                <p class="tagline">Passionate about Network Security, Penetration Testing, and Vulnerability Assessment.</p>
+                
+                <div class="cta-buttons">
+                    <a href="about.html" class="btn btn-primary">About Me</a>
+                    <a href="contact.html" class="btn btn-secondary">Contact</a>
+                </div>
+
+                <!-- Social Media Links -->
+                <div class="social-links">
+                    <a href="https://www.facebook.com/mdshahinalom.shahin.3532" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://linkedin.com" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://www.instagram.com/mdshahin12348/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://github.com/ShahinAlom-sec" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+
+            <!-- Profile Image Card with Caption -->
+            <div class="hero-image-card">
+                <img src="images/profile.jpg" alt="Shahin Alom">
+                <p class="image-caption">Shahin Alom</p>
             </div>
         </div>
     </main>
@@ -40,8 +64,9 @@
         <p>&copy; 2026 Shahin Alom. All rights reserved.</p>
     </footer>
 
-    <!-- Matrix Rain JavaScript -->
+    <!-- Red Matrix Rain & Typing Effect Script -->
     <script>
+        // Matrix Rain Effect (Red Color)
         const canvas = document.getElementById('matrix-canvas');
         const ctx = canvas.getContext('2d');
 
@@ -61,7 +86,7 @@
             ctx.fillStyle = 'rgba(11, 15, 23, 0.08)';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-            ctx.fillStyle = '#00ff88'; // অক্ষর ও চিহ্নের রঙ (তোমার লাল থিমের সাথে মিল রেখে)
+            ctx.fillStyle = '#e11d48'; // Red Matrix Color
             ctx.font = fontSize + 'px monospace';
 
             for (let i = 0; i < drops.length; i++) {
@@ -74,8 +99,40 @@
                 drops[i]++;
             }
         }
-
         setInterval(drawMatrix, 33);
+
+        // Typing Text Effect
+        const words = ["Ethical Hacking", "Red Team Operations", "Web Security", "Threat Analysis"];
+        let wordIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        const typingElement = document.getElementById("typing-text");
+
+        function type() {
+            const currentWord = words[wordIndex];
+            
+            if (isDeleting) {
+                typingElement.textContent = currentWord.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typingElement.textContent = currentWord.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            let typeSpeed = isDeleting ? 50 : 100;
+
+            if (!isDeleting && charIndex === currentWord.length) {
+                typeSpeed = 2000;
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                wordIndex = (wordIndex + 1) % words.length;
+                typeSpeed = 500;
+            }
+
+            setTimeout(type, typeSpeed);
+        }
+        document.addEventListener("DOMContentLoaded", type);
     </script>
 </body>
 </html>
