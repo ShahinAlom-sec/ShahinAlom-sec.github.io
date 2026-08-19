@@ -180,37 +180,70 @@
     </section>
 
     <!-- 6. CONTACT SECTION -->
-    <section id="contact" class="section-container">
-        <h2 class="section-title">Contact <span class="highlight-red">Me</span></h2>
-        <div class="contact-wrapper">
-            <div class="contact-info">
-                <h3>Get in Touch</h3>
-                <p>Feel free to reach out for security collaborations, inquiries, or networking!</p>
-                <div class="info-item">
-                    <i class="fas fa-envelope"></i>
-                    <span>shahinalom@example.com</span>
-                </div>
-                <div class="info-item">
-                    <i class="fas fa-location-dot"></i>
-                    <span>Dhaka, Bangladesh</span>
-                </div>
-            </div>
+    <!-- Contact Section -->
+<section id="contact" class="section-container">
+    <h2 class="section-title"><i class="fas fa-envelope highlight-red"></i> Get In Touch</h2>
+    <p class="contact-desc">Have a question or want to work together? Send me a message!</p>
 
-            <form class="contact-form" onsubmit="event.preventDefault(); alert('Message Sent!');">
-                <input type="text" placeholder="Your Name" required>
-                <input type="email" placeholder="Your Email" required>
-                <textarea rows="5" placeholder="Your Message" required></textarea>
-                <button type="submit" class="btn btn-primary">Send Message</button>
-            </form>
-        </div>
-    </section>
+    <form class="contact-form" id="telegram-form">
+        <input type="text" id="name" placeholder="Your Name" required>
+        <input type="email" id="email" placeholder="Your Email" required>
+        <textarea id="message" rows="5" placeholder="Your Message" required></textarea>
+        <button type="submit" class="btn btn-primary" id="send-btn">Send Message</button>
+    </form>
+</section>
 
-    <footer>
-        <p>&copy; 2026 Shahin Alom. All rights reserved.</p>
-    </footer>
+<!-- Telegram Bot Script -->
+<script>
+document.getElementById('telegram-form').addEventListener('submit', function(e) {
+    e.preventDefault();
 
-    <!-- Matrix Rain & Typing Scripts -->
-    <script>
+    // ⚠️ এখানে তোমার Bot Token এবং Chat ID বসাবে
+    const botToken = '8637673862:AAGfRMos7cDiCUH8KbR9kAyl26BP4kazAss';
+    const chatId = '5406699878';
+
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const message = document.getElementById('message').value;
+    const sendBtn = document.getElementById('send-btn');
+
+    sendBtn.innerText = 'Sending...';
+    sendBtn.disabled = true;
+
+    const text = `📩 *New Website Message!*\n\n👤 *Name:* ${name}\n📧 *Email:* ${email}\n💬 *Message:* ${message}`;
+
+    const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
+
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            chat_id: chatId,
+            text: text,
+            parse_mode: 'Markdown'
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.ok) {
+            alert('Message sent successfully!');
+            document.getElementById('telegram-form').reset();
+        } else {
+            alert('Failed to send message. Please check your credentials.');
+        }
+    })
+    .catch(error => {
+        alert('Error sending message!');
+        console.error(error);
+    })
+    .finally(() => {
+        sendBtn.innerText = 'Send Message';
+        sendBtn.disabled = false;
+    });
+});
+</script>
         const canvas = document.getElementById('matrix-canvas');
         const ctx = canvas.getContext('2d');
 
