@@ -358,3 +358,32 @@ footer {
         height: 180px;
     }
 }
+/* Direct Email Display Style */
+.contact-email-box {
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 1.05rem;
+    color: #94a3b8;
+    background: #111827;
+    padding: 12px 20px;
+    border-radius: 8px;
+    border: 1px solid #1e293b;
+    display: inline-block;
+    max-width: 100%;
+}
+
+.contact-email-box i {
+    margin-right: 8px;
+}
+
+.email-link {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.email-link:hover {
+    color: #e11d48; /* Highlight Red */
+    text-decoration: underline;
+}
