@@ -202,12 +202,11 @@
 
 <!-- Telegram Bot Script -->
 <script>
-     document.getElementById('telegram-form').addEventListener('submit', function(e) {
-     e.preventDefault();
+document.getElementById('telegram-form').addEventListener('submit', function(e) {
+    e.preventDefault();
 
-    // ⚠️ এখানে তোমার Bot Token এবং Chat ID বসাবে
-    const botToken = '8637673862:AAGfRMos7cDiCUH8KbR9kAyl26BP4kazAss';
-    const chatId = '5406699878';
+    const botToken = 'YOUR_BOT_TOKEN_HERE';
+    const chatId = 'YOUR_CHAT_ID_HERE';
 
     const name = document.getElementById('name').value;
     const email = document.getElementById('email').value;
@@ -219,97 +218,92 @@
 
     const text = `📩 *New Website Message!*\n\n👤 *Name:* ${name}\n📧 *Email:* ${email}\n💬 *Message:* ${message}`;
 
-    const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
-
-    fetch(url, {
+    fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            chat_id: chatId,
-            text: text,
-            parse_mode: 'Markdown'
-        })
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ chat_id: chatId, text: text, parse_mode: 'Markdown' })
     })
-    .then(response => response.json())
+    .then(res => res.json())
     .then(data => {
         if (data.ok) {
             alert('Message sent successfully!');
             document.getElementById('telegram-form').reset();
         } else {
-            alert('Failed to send message. Please check your credentials.');
+            alert('Failed to send message.');
         }
     })
-    .catch(error => {
-        alert('Error sending message!');
-        console.error(error);
-    })
+    .catch(() => alert('Error sending message!'))
     .finally(() => {
         sendBtn.innerText = 'Send Message';
         sendBtn.disabled = false;
     });
- });
+});
 </script>
-        const canvas = document.getElementById('matrix-canvas');
-        const ctx = canvas.getContext('2d');
 
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-        resizeCanvas();
-        window.addEventListener('resize', resizeCanvas);
+<!-- Matrix & Typing Animation Script -->
+<script>
+// Matrix Background Animation
+const canvas = document.getElementById('matrix-canvas');
+if (canvas) {
+    const ctx = canvas.getContext('2d');
+    function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
 
-        const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*';
-        const fontSize = 14;
-        const columns = Math.floor(canvas.width / fontSize);
-        const drops = Array(columns).fill(1);
+    const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*';
+    const fontSize = 14;
+    const columns = Math.floor(canvas.width / fontSize);
+    const drops = Array(columns).fill(1);
 
-        function drawMatrix() {
-            ctx.fillStyle = 'rgba(11, 15, 23, 0.08)';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = '#e11d48';
-            ctx.font = fontSize + 'px monospace';
+    function drawMatrix() {
+        ctx.fillStyle = 'rgba(11, 15, 23, 0.08)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = '#e11d48';
+        ctx.font = fontSize + 'px monospace';
 
-            for (let i = 0; i < drops.length; i++) {
-                const text = letters.charAt(Math.floor(Math.random() * letters.length));
-                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-
-                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-                    drops[i] = 0;
-                }
-                drops[i]++;
+        for (let i = 0; i < drops.length; i++) {
+            const text = letters.charAt(Math.floor(Math.random() * letters.length));
+            ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+            if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                drops[i] = 0;
             }
+            drops[i]++;
         }
-        setInterval(drawMatrix, 33);
+    }
+    setInterval(drawMatrix, 33);
+}
 
-        // Typing Effect
-        const words = ["Ethical Hacking", "Red Team Operations", "Web Security", "Threat Analysis"];
-        let wordIndex = 0, charIndex = 0, isDeleting = false;
-        const typingElement = document.getElementById("typing-text");
+// Typing Effect
+const words = ["Ethical Hacking", "Red Team Operations", "Web Security", "Threat Analysis"];
+let wordIndex = 0, charIndex = 0, isDeleting = false;
+const typingElement = document.getElementById("typing-text");
 
-        function type() {
-            const currentWord = words[wordIndex];
-            typingElement.textContent = isDeleting 
-                ? currentWord.substring(0, charIndex - 1) 
-                : currentWord.substring(0, charIndex + 1);
+function type() {
+    if (!typingElement) return;
+    const currentWord = words[wordIndex];
+    typingElement.textContent = isDeleting 
+        ? currentWord.substring(0, charIndex - 1) 
+        : currentWord.substring(0, charIndex + 1);
 
-            charIndex += isDeleting ? -1 : 1;
-            let typeSpeed = isDeleting ? 50 : 100;
+    charIndex += isDeleting ? -1 : 1;
+    let typeSpeed = isDeleting ? 50 : 100;
 
-            if (!isDeleting && charIndex === currentWord.length) {
-                typeSpeed = 2000;
-                isDeleting = true;
-            } else if (isDeleting && charIndex === 0) {
-                isDeleting = false;
-                wordIndex = (wordIndex + 1) % words.length;
-                typeSpeed = 500;
-            }
+    if (!isDeleting && charIndex === currentWord.length) {
+        typeSpeed = 2000;
+        isDeleting = true;
+    } else if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        wordIndex = (wordIndex + 1) % words.length;
+        typeSpeed = 500;
+    }
+    setTimeout(type, typeSpeed);
+}
 
-            setTimeout(type, typeSpeed);
-        }
-        document.addEventListener("DOMContentLoaded", type);
+document.addEventListener("DOMContentLoaded", type);
 </script>
+
 </body>
 </html>
